@@ -8,7 +8,7 @@ let event = (process.env.GET_ALL_SITE_COMMENTS === "1" ? "site:" : "") + process
 
 nap_socket.on(new Buffer(event).toString("base64"), (comment) => {
   const text = `<b>${comment.nickname || "Unknown"}</b>\n${comment.text} <a href="https://whatsonchain.com/tx/${comment._txid}">🔗</a>\n\n${comment.key}`;
-  bot.telegram.sendMessage(process.env.CHANNEL_NAME, text, { parse_mode: "HTML" }).catch(err => {
+  bot.telegram.sendMessage(process.env.CHANNEL_NAME, text, { parse_mode: "HTML", disable_web_page_preview: true }).catch(err => {
     console.log(err);
   })
 })
